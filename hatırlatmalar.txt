@@ -1,0 +1,19 @@
+kullanıcı bilgilerini tutan base yok
+//Firabase
+-loginview, signupview
+
+öncelikle login ekranı olmalı direkt kayıt ekranınaa 
+yönlendiriyor
+
+login_view.dart ekranından sonra complete_profile e 
+pushlaması yanlış firebaseden bilgileri alıp
+ana ekranı açması gerekiyor
+
+contextler boş
+
+uygulamanın ilk defa açılmasına yönelik düzenleme
+
+kalp ritmi silinecek
+
+uyku saati kullanıcıdan alınacak
+
