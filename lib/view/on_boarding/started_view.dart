@@ -1,7 +1,8 @@
 import 'package:fitness/common/colo_extension.dart';
+import 'package:fitness/view/main_tab/main_tab_view.dart';
 import 'package:fitness/view/on_boarding/on_boarding_view.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widget/round_button.dart';
 
 class StartedView extends StatefulWidget {
@@ -13,6 +14,18 @@ class StartedView extends StatefulWidget {
 
 class _StartedViewState extends State<StartedView> {
   bool isChangeColor = false;
+  late SharedPreferences _prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPrefs();
+  }
+
+  Future<void> _initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    _prefs.setBool('isFirstTime', false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +36,7 @@ class _StartedViewState extends State<StartedView> {
           width: media.width,
           decoration: BoxDecoration(
             gradient: isChangeColor
-                ? LinearGradient(
-                    colors: TColor.primaryG,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight)
+                ? LinearGradient(colors: TColor.primaryG, begin: Alignment.topLeft, end: Alignment.bottomRight)
                 : null,
           ),
           child: Column(
@@ -34,11 +44,8 @@ class _StartedViewState extends State<StartedView> {
             children: [
               const Spacer(),
               Text(
-                "Fitness",
-                style: TextStyle(
-                    color: TColor.black,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w700),
+                "Fitness AI Pro",
+                style: TextStyle(color: TColor.black, fontSize: 36, fontWeight: FontWeight.w700),
               ),
               Text(
                 "Everybody Can Train",
@@ -50,19 +57,14 @@ class _StartedViewState extends State<StartedView> {
               const Spacer(),
               SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.all(24),
                   child: RoundButton(
                     title: "Get Started",
-                    type: isChangeColor
-                        ? RoundButtonType.textGradient
-                        : RoundButtonType.bgGradient,
+                    type: isChangeColor ? RoundButtonType.textGradient : RoundButtonType.bgGradient,
                     onPressed: () {
                       if (isChangeColor) {
                         //GO Next Screen
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const OnBoardingView()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const OnBoardingView()));
                       } else {
                         //Change Color
                         setState(() {

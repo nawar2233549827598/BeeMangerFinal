@@ -22,7 +22,7 @@ class _LoginViewState extends State<LoginView> {
         child: SafeArea(
           child: Container(
             height: media.height * 0.9,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -32,10 +32,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 Text(
                   "Welcome Back",
-                  style: TextStyle(
-                      color: TColor.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
+                  style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
                   height: media.width * 0.05,
@@ -74,22 +71,15 @@ class _LoginViewState extends State<LoginView> {
                   children: [
                     Text(
                       "Forgot your password?",
-                      style: TextStyle(
-                          color: TColor.gray,
-                          fontSize: 10,
-                          decoration: TextDecoration.underline),
+                      style: TextStyle(color: TColor.gray, fontSize: 10, decoration: TextDecoration.underline),
                     ),
                   ],
                 ),
-               const Spacer(),
+                const Spacer(),
                 RoundButton(
                     title: "Login",
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const CompleteProfileView()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CompleteProfileView()));
                     }),
                 SizedBox(
                   height: media.width * 0.04,
@@ -185,10 +175,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       Text(
                         "Register",
-                        style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
+                        style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
                       )
                     ],
                   ),

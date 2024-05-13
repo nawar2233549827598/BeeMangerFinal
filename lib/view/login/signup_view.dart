@@ -22,7 +22,7 @@ class _SignUpViewState extends State<SignUpView> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -32,10 +32,7 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 Text(
                   "Create an Account",
-                  style: TextStyle(
-                      color: TColor.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
+                  style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
                   height: media.width * 0.05,
@@ -90,29 +87,28 @@ class _SignUpViewState extends State<SignUpView> {
                         });
                       },
                       icon: Icon(
-                        isCheck
-                            ? Icons.check_box_outlined
-                            : Icons.check_box_outline_blank_outlined,
+                        isCheck ? Icons.check_box_outlined : Icons.check_box_outline_blank_outlined,
                         color: TColor.gray,
                         size: 20,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
-                      child:  Text(
-                          "By continuing you accept our Privacy Policy and\nTerm of Use",
-                          style: TextStyle(color: TColor.gray, fontSize: 10),
-                        ),
-                     
+                      child: Text(
+                        "By continuing you accept our Privacy Policy and\nTerm of Use",
+                        style: TextStyle(color: TColor.gray, fontSize: 10),
+                      ),
                     )
                   ],
                 ),
                 SizedBox(
                   height: media.width * 0.4,
                 ),
-                RoundButton(title: "Register", onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CompleteProfileView()  ));
-                }),
+                RoundButton(
+                    title: "Register",
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CompleteProfileView()));
+                    }),
                 SizedBox(
                   height: media.width * 0.04,
                 ),
@@ -162,11 +158,9 @@ class _SignUpViewState extends State<SignUpView> {
                         ),
                       ),
                     ),
-
-                     SizedBox(
+                    SizedBox(
                       width: media.width * 0.04,
                     ),
-
                     GestureDetector(
                       onTap: () {},
                       child: Container(
@@ -195,10 +189,7 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 TextButton(
                   onPressed: () {
-                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -212,10 +203,7 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       Text(
                         "Login",
-                        style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
+                        style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
                       )
                     ],
                   ),

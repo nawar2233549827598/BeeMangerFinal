@@ -1,21 +1,26 @@
 import 'package:fitness/view/main_tab/main_tab_view.dart';
 import 'package:fitness/view/on_boarding/started_view.dart';
 import 'package:flutter/material.dart';
-
 import 'common/colo_extension.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+
+  runApp(MyApp(isFirstTime: isFirstTime));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({required this.isFirstTime});
+  final bool isFirstTime;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fitness 3 in 1',
+      title: 'FitAi Pro',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           // This is the theme of your application.
@@ -29,7 +34,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primaryColor: TColor.primaryColor1,
           fontFamily: "Poppins"),
-      home: const StartedView(),
+      home: isFirstTime ? StartedView() : MainTabView(),
     );
   }
 }
