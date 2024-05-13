@@ -25,10 +25,8 @@ class ExamplePage extends StatefulWidget {
 }
 
 class _ExamplePageState extends State<ExamplePage> {
-  CalendarAgendaController _calendarAgendaControllerAppBar =
-      CalendarAgendaController();
-  CalendarAgendaController _calendarAgendaControllerNotAppBar =
-      CalendarAgendaController();
+  CalendarAgendaController _calendarAgendaControllerAppBar = CalendarAgendaController();
+  CalendarAgendaController _calendarAgendaControllerNotAppBar = CalendarAgendaController();
 
   late DateTime _selectedDateAppBBar;
   late DateTime _selectedDateNotAppBBar;
@@ -71,10 +69,7 @@ class _ExamplePageState extends State<ExamplePage> {
         calendarEventColor: Colors.green,
         firstDate: DateTime.now().subtract(Duration(days: 140)),
         lastDate: DateTime.now().add(Duration(days: 60)),
-        events: List.generate(
-            100,
-            (index) => DateTime.now()
-                .subtract(Duration(days: index * random.nextInt(5)))),
+        events: List.generate(100, (index) => DateTime.now().subtract(Duration(days: index * random.nextInt(5)))),
         onDateSelected: (date) {
           setState(() {
             _selectedDateAppBBar = date;
@@ -84,9 +79,9 @@ class _ExamplePageState extends State<ExamplePage> {
           width: double.maxFinite,
           height: double.maxFinite,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [ const Color(0xff9DCEFF), const Color(0xff92A3FD),
-                
+            gradient: LinearGradient(colors: [
+              const Color(0xff9DCEFF),
+              const Color(0xff92A3FD),
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
             borderRadius: BorderRadius.circular(10.0),
           ),

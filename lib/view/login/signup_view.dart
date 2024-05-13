@@ -13,7 +13,21 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   bool isCheck = false;
+  bool obscureText = true;
+  bool isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+
+  bool isValidPassword(String password) {
+    return password.length >= 6; // Change this to your password validation logic
+  }
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -22,7 +36,7 @@ class _SignUpViewState extends State<SignUpView> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -37,24 +51,26 @@ class _SignUpViewState extends State<SignUpView> {
                 SizedBox(
                   height: media.width * 0.05,
                 ),
-                const RoundTextField(
+                RoundTextField(
                   hitText: "First Name",
                   icon: "assets/img/user_text.png",
+                  controller: _firstNameController,
                 ),
                 SizedBox(
                   height: media.width * 0.04,
                 ),
-                const RoundTextField(
+                RoundTextField(
                   hitText: "Last Name",
                   icon: "assets/img/user_text.png",
+                  controller: _lastNameController,
                 ),
                 SizedBox(
                   height: media.width * 0.04,
                 ),
-                const RoundTextField(
+                RoundTextField(
                   hitText: "Email",
                   icon: "assets/img/email.png",
-                  keyboardType: TextInputType.emailAddress,
+                  controller: _emailController,
                 ),
                 SizedBox(
                   height: media.width * 0.04,
@@ -62,53 +78,98 @@ class _SignUpViewState extends State<SignUpView> {
                 RoundTextField(
                   hitText: "Password",
                   icon: "assets/img/lock.png",
-                  obscureText: true,
+                  controller: _passwordController,
+                  obscureText: obscureText, // Pass the obscureText state here
                   rigtIcon: TextButton(
-                      onPressed: () {},
-                      child: Container(
-                          alignment: Alignment.center,
-                          width: 20,
-                          height: 20,
-                          child: Image.asset(
-                            "assets/img/show_password.png",
-                            width: 20,
-                            height: 20,
-                            fit: BoxFit.contain,
-                            color: TColor.gray,
-                          ))),
-                ),
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isCheck = !isCheck;
-                        });
-                      },
-                      icon: Icon(
-                        isCheck ? Icons.check_box_outlined : Icons.check_box_outline_blank_outlined,
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText; // Toggle the value
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 20,
+                      height: 20,
+                      child: Image.asset(
+                        "assets/img/show_password.png",
+                        width: 20,
+                        height: 20,
+                        fit: BoxFit.contain,
                         color: TColor.gray,
-                        size: 20,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: isCheck,
+                      onChanged: (value) {
+                        setState(() {
+                          isCheck = value!;
+                        });
+                      },
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      activeColor: TColor.gray,
+                    ),
+                    Flexible(
                       child: Text(
                         "By continuing you accept our Privacy Policy and\nTerm of Use",
                         style: TextStyle(color: TColor.gray, fontSize: 10),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 SizedBox(
                   height: media.width * 0.4,
                 ),
-                RoundButton(
-                    title: "Register",
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CompleteProfileView()));
-                    }),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_firstNameController.text.isEmpty || _lastNameController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please fill in your first and last name.'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (!isValidEmail(_emailController.text)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter a valid email address.'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (!isValidPassword(_passwordController.text)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter a password with at least 6 characters.'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (!isCheck) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please accept the terms to continue.'),
+                        ),
+                      );
+                      return;
+                    }
+                    // If all validations pass, proceed with registration
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CompleteProfileView(),
+                      ),
+                    );
+                  },
+                  child: Text("Register"),
+                ),
                 SizedBox(
                   height: media.width * 0.04,
                 ),
