@@ -19,20 +19,17 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
     {
       "image": "assets/img/goal_1.png",
       "title": "Improve Shape",
-      "subtitle":
-          "I have a low amount of body fat\nand need / want to build more\nmuscle"
+      "subtitle": "I have a low amount of body fat\nand need / want to build more\nmuscle"
     },
     {
       "image": "assets/img/goal_2.png",
       "title": "Lean & Tone",
-      "subtitle":
-          "I’m “skinny fat”. look thin but have\nno shape. I want to add learn\nmuscle in the right way"
+      "subtitle": "I’m “skinny fat”. look thin but have\nno shape. I want to add learn\nmuscle in the right way"
     },
     {
       "image": "assets/img/goal_3.png",
       "title": "Lose a Fat",
-      "subtitle":
-          "I have over 20 lbs to lose. I want to\ndrop all this fat and gain muscle\nmass"
+      "subtitle": "I have over 20 lbs to lose. I want to\ndrop all this fat and gain muscle\nmass"
     },
   ];
 
@@ -51,13 +48,10 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                     (gObj) => Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: TColor.primaryG,
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
+                            colors: TColor.primaryG, begin: Alignment.topLeft, end: Alignment.bottomRight),
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      padding: EdgeInsets.symmetric(
-                          vertical: media.width * 0.1, horizontal: 25),
+                      padding: EdgeInsets.symmetric(vertical: media.width * 0.1, horizontal: 25),
                       alignment: Alignment.center,
                       child: FittedBox(
                         child: Column(
@@ -72,10 +66,7 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                             ),
                             Text(
                               gObj["title"].toString(),
-                              style: TextStyle(
-                                  color: TColor.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700),
+                              style: TextStyle(color: TColor.white, fontSize: 14, fontWeight: FontWeight.w700),
                             ),
                             Container(
                               width: media.width * 0.1,
@@ -88,8 +79,7 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                             Text(
                               gObj["subtitle"].toString(),
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(color: TColor.white, fontSize: 12),
+                              style: TextStyle(color: TColor.white, fontSize: 12),
                             ),
                           ],
                         ),
@@ -117,10 +107,7 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                 ),
                 Text(
                   "What is your goal ?",
-                  style: TextStyle(
-                      color: TColor.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
+                  style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 Text(
                   "It will help us to choose a best\nprogram for you",
@@ -131,14 +118,14 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                 SizedBox(
                   height: media.width * 0.05,
                 ),
-                RoundButton(
-                    title: "Confirm",
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const WelcomeView()));
-                    }),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: RoundButton(
+                      title: "Confirm",
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomeView()));
+                      }),
+                ),
               ],
             ),
           )
